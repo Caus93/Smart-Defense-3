@@ -1,0 +1,61 @@
+/* Estilo por Etiqueta */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+h1 {
+  color: #2b3c73;
+}
+
+/* Estilos personalizados */
+
+.navbar-shadow {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.icono-placeholder,
+.icono-placeholder-image,
+.icono-placeholder-image2 {
+  padding: 0.25em 0.6em;
+  border-radius: 0.3rem;
+  border: 1px, solid, #d3d6e4;
+  text-align: center;
+  box-shadow: 0 2px 3px rgba(0 0 0 / 0.15);
+  width: 30%;
+  margin: 0 10px;
+}
+
+.icono-placeholder-image::placeholder {
+  background-image: url(../assets/img\ airplane\ destiny.png);
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: 1rem center;
+}
+
+.icono-placeholder-image2::placeholder {
+  background-image: url(../assets/img\ airplane.png);
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: 1rem center;
+}
+
+.btn-shadow {
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* Media Query */
+
+@media (max-width: 767px) {
+  .icono-placeholder-image2,
+  .icono-placeholder-image {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
