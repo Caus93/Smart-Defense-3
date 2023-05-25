@@ -1,4 +1,4 @@
-/* Estilo por Etiqueta */
+/* Estilo globales */
 
 * {
   margin: 0;
@@ -14,11 +14,19 @@ h1 {
   color: #2b3c73;
 }
 
+.subtitle-color {
+  color: #2b3c73;
+}
+
 /* Estilos personalizados */
+
+/* Navbar */
 
 .navbar-shadow {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+/* Inputs */
 
 .icono-placeholder,
 .icono-placeholder-image,
@@ -46,16 +54,48 @@ h1 {
   background-position: 1rem center;
 }
 
+/* Iconos Section */
+
+.icon-check-color {
+  color: #94193e;
+}
+
+/* Botones */
+
 .btn-shadow {
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
 }
 
+.btn-maincolor {
+  background-color: #2b3c73;
+  width: 30%;
+  margin: 0 10px;
+}
+
+/* Footer */
+
+.imagenFooter {
+  width: 5%;
+}
+
+.iconos:hover {
+  opacity: 0.65;
+}
+
 /* Media Query */
 
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .icono-placeholder-image2,
-  .icono-placeholder-image {
+  .icono-placeholder-image,
+  .custom-btn {
     width: 100%;
     margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 991px) {
+  .icono-placeholder-image::placeholder,
+  .icono-placeholder-image2::placeholder {
+    background-position: 0.2rem center;
   }
 }
