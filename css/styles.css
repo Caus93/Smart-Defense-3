@@ -30,7 +30,8 @@ h1 {
 
 .icono-placeholder,
 .icono-placeholder-image,
-.icono-placeholder-image2 {
+.icono-placeholder-image2,
+.placeholder-person {
   padding: 0.25em 0.6em;
   border-radius: 0.3rem;
   border: 1px, solid, #d3d6e4;
@@ -52,6 +53,10 @@ h1 {
   background-size: 20px 20px;
   background-repeat: no-repeat;
   background-position: 1rem center;
+}
+
+.center-input-content {
+  text-align: center;
 }
 
 /* Iconos Section */
