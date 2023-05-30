@@ -115,7 +115,7 @@ h1 {
 
 @media (max-width: 991px) {
   .select-style {
-    width: 150px; /* Ajusta el ancho según tus necesidades */
+    width: 80%; /* Ajusta el ancho según tus necesidades */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
