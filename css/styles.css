@@ -55,6 +55,14 @@ h1 {
   background-position: 1rem center;
 }
 
+.select-style {
+  padding-right: 20px;
+  border-radius: 0.3rem;
+  border: 1px, solid, #d3d6e4;
+  text-align: center;
+  box-shadow: 0 2px 3px rgba(0 0 0 / 0.15);
+}
+
 .center-input-content {
   text-align: center;
 }
@@ -102,5 +110,20 @@ h1 {
   .icono-placeholder-image::placeholder,
   .icono-placeholder-image2::placeholder {
     background-position: 0.2rem center;
+  }
+}
+
+@media (max-width: 991px) {
+  .select-style {
+    width: 150px; /* Ajusta el ancho según tus necesidades */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .form-select-sm option:first-child {
+    display: none;
+  }
+  .form-select-sm option:first-child::before {
+    content: "Aerolínea";
   }
 }
