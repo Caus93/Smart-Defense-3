@@ -127,3 +127,9 @@ h1 {
     content: "Aerolínea";
   }
 }
+
+@media (max-width: 767px) {
+  .hide-img {
+    display: none;
+  }
+}
