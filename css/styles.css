@@ -85,6 +85,10 @@ h1 {
   margin: 0 10px;
 }
 
+.daterangepicker .drp-buttons .applyBtn {
+  background-color: #2b3c73;
+}
+
 /* Footer */
 
 .imagenFooter {
