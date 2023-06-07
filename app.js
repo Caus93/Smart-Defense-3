@@ -89,6 +89,9 @@ btnEnviar.addEventListener("click", (event) => {
   if (!isChecked) {
     isFormValid = false;
     console.log("Ningún checkbox seleccionado");
+    checkboxInputs.forEach((input) => {
+      input.classList.add("validate-error");
+    });
   }
 
   if (!isFormValid) {
