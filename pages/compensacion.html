@@ -46,6 +46,10 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../css/styles.css" />
 
+    <!-- SweetAlert -->
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Dateranger -->
     <link
       rel="stylesheet"
@@ -83,7 +87,7 @@
             <ul class="navbar-nav">
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#"
-                  >Conoce tus derechos</a
+                  >Comprobar Compensación</a
                 >
               </li>
               <li class="nav-item">
@@ -107,19 +111,21 @@
                   >Vamos a comprobar si la aerolínea debería compensarte</strong
                 >
               </h5>
-              <form>
+              <form id="form-datosViaje">
                 <div class="row g-3 mb-3">
                   <div class="d-flex flex-column flex-md-row">
                     <input
+                      id="aeropuertoSalida"
                       type="text"
-                      class="form-control form-control-sm icono-placeholder-image2"
+                      class="form-control form-control-sm icono-placeholder-image2 validate-input"
                       placeholder="Aeropuerto de salida"
                       style="width: 100%"
                       name="aeropuertoSalida"
                     />
                     <input
+                      id="aeropuertoDestino"
                       type="text"
-                      class="form-control form-control-sm icono-placeholder-image"
+                      class="form-control form-control-sm icono-placeholder-image validate-input"
                       placeholder="Aeropuerto de destino"
                       style="width: 100%"
                       name="aeropuertoDestino"
@@ -136,11 +142,11 @@
                     <div class="placeholder-person col-6">
                       <div class="form-check">
                         <input
-                          class="form-check-input center-input-content"
+                          class="form-check-input center-input-content validate-input checkbox-input"
                           type="checkbox"
                           value=""
                           id="checkbox1"
-                          name="tipoVuelo"
+                          name="checkboxGroup"
                         />
                         <label class="form-check-label" for="checkbox1">
                           Nal.
@@ -150,11 +156,11 @@
                     <div class="placeholder-person col-6">
                       <div class="form-check">
                         <input
-                          class="form-check-input center-input-content"
+                          class="form-check-input center-input-content validate-input checkbox-input"
                           type="checkbox"
                           value=""
                           id="checkbox2"
-                          name="tipoVuelo"
+                          name="checkboxGroup"
                         />
                         <label class="form-check-label" for="checkbox2">
                           Intl.
@@ -172,11 +178,12 @@
                     </h7>
                     <div class="d-flex justify-content-center">
                       <select
-                        class="form-select form-select-sm select-style me-2"
+                        id="aerolinea"
+                        class="form-select form-select-sm select-style me-2 validate-input"
                         aria-label=".form-select-sm example"
                         name="aerolinea"
                       >
-                        <option selected>Seleccione la aerolínea</option>
+                        <option>Seleccione la aerolínea</option>
                         <option value="1">Información aerolíneas</option>
                       </select>
                     </div>
@@ -189,8 +196,9 @@
                     </h7>
                     <div class="d-flex justify-content-center">
                       <input
+                        id="numeroVuelo"
                         type="text"
-                        class="form-control form-control-sm placeholder-person"
+                        class="form-control form-control-sm placeholder-person validate-input"
                         placeholder="Digite su número de vuelo"
                         style="width: 100%"
                         name="numeroVuelo"
@@ -207,37 +215,181 @@
                     </h7>
                     <div class="d-flex justify-content-center">
                       <input
+                        id="fechaVuelo"
                         type="text"
-                        class="form-control form-control-sm placeholder-person"
+                        class="form-control form-control-sm placeholder-person validate-input"
                         placeholder="Fecha de vuelo"
                         style="width: 100%"
                         name="fechaVuelo"
                       />
                     </div>
                   </div>
-                  <!--                   <div class="col-6">
+                </div>
+                <div class="d-flex">
+                  <div class="col-6">
                     <h7
                       class="order-1 subtitle-color text-center d-flex justify-content-center m-4"
                     >
-                      <strong>Hora de salida</strong>
+                      <strong>Precio Tiquete</strong>
                     </h7>
                     <div class="d-flex justify-content-center">
                       <input
+                        id="precioVuelo"
                         type="text"
-                        class="form-control form-control-sm placeholder-person"
-                        placeholder="Digite hora de salida"
+                        class="form-control form-control-sm placeholder-person validate-input"
+                        placeholder="Precio tiquete"
                         style="width: 100%"
-                        name="horaSalida"
+                        name="precioVuelo"
                       />
                     </div>
-                  </div> -->
+                  </div>
+                  <div class="col-6">
+                    <h7
+                      class="order-1 subtitle-color text-center d-flex justify-content-center m-4"
+                    >
+                      <strong>Valor Afectaciones</strong>
+                    </h7>
+                    <div class="d-flex justify-content-center">
+                      <input
+                        id="precioAfectacion"
+                        type="text"
+                        class="form-control form-control-sm placeholder-person validate-input"
+                        placeholder="Digite el valor $"
+                        style="width: 100%"
+                        name="precioAfectacion"
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div class="d-flex justify-content-center">
                   <button
+                    id="btn-siguiente"
                     class="btn btn-secondary btn-shadow btn-maincolor custom-btn mt-5"
                     type="submit"
                   >
                     Siguiente
+                  </button>
+                </div>
+              </form>
+              <form id="form-datosPerson" class="d-none">
+                <div class="row g-3 mb-3">
+                  <div class="col-sm-6">
+                    <h7
+                      class="order-1 subtitle-color text-center d-flex justify-content-center m-4"
+                    >
+                      <strong>Nombre</strong>
+                    </h7>
+                    <div class="d-flex justify-content-center">
+                      <input
+                        id="nombrePasajero"
+                        type="text"
+                        class="form-control form-control-sm placeholder-person validate-input"
+                        placeholder="Escriba su nombre"
+                        style="width: 100%"
+                        name="nombrePasajero"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <h7
+                      class="order-1 subtitle-color text-center d-flex justify-content-center m-4"
+                    >
+                      <strong>Apellidos</strong>
+                    </h7>
+                    <div class="d-flex justify-content-center">
+                      <input
+                        id="apellidoPasajero"
+                        type="text"
+                        class="form-control form-control-sm placeholder-person validate-input"
+                        placeholder="Escriba su apellido"
+                        style="width: 100%"
+                        name="apellidoPasajero"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <h7
+                      class="order-1 subtitle-color text-center d-flex justify-content-center m-4"
+                    >
+                      <strong>Cédula/ID</strong>
+                    </h7>
+                    <div class="d-flex justify-content-center">
+                      <input
+                        id="idPasajero"
+                        type="text"
+                        class="form-control form-control-sm placeholder-person validate-input"
+                        placeholder="Dígite su Cédula/ID"
+                        style="width: 100%"
+                        name="idPasajero"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <h7
+                      class="order-1 subtitle-color text-center d-flex justify-content-center m-4"
+                    >
+                      <strong>E-mail</strong>
+                    </h7>
+                    <div class="d-flex justify-content-center">
+                      <input
+                        id="emailPasajero"
+                        type="text"
+                        class="form-control form-control-sm placeholder-person validate-input"
+                        placeholder="Escriba su E-mail"
+                        style="width: 100%"
+                        name="emailPasajero"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <h7
+                      class="order-1 subtitle-color text-center d-flex justify-content-center m-4"
+                    >
+                      <strong>Celular</strong>
+                    </h7>
+                    <div class="d-flex justify-content-center">
+                      <input
+                        id="celPasajero"
+                        type="text"
+                        class="form-control form-control-sm placeholder-person validate-input"
+                        placeholder="Dígite su celular"
+                        style="width: 100%"
+                        name="celPasajero"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <h7
+                      class="order-1 subtitle-color text-center d-flex justify-content-center m-4"
+                    >
+                      <strong>Ciudad</strong>
+                    </h7>
+                    <div class="d-flex justify-content-center">
+                      <input
+                        id="ciudadPasajero"
+                        type="text"
+                        class="form-control form-control-sm placeholder-person validate-input"
+                        placeholder="Escriba su ciudad"
+                        style="width: 100%"
+                        name="ciudadPasajero"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <button
+                    id="btn-atras"
+                    class="btn btn-secondary btn-shadow btn-maincolor custom-btn mt-5"
+                    type="submit"
+                  >
+                    Atrás
+                  </button>
+                  <button
+                    id="btn-enviar"
+                    class="btn btn-secondary btn-shadow btn-maincolor custom-btn mt-5"
+                    type="submit"
+                  >
+                    Enviar
                   </button>
                 </div>
               </form>
@@ -291,12 +443,6 @@
     ></script>
 
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-      integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
-      crossorigin="anonymous"
-    ></script>
-
-    <script
       type="text/javascript"
       src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"
     ></script>
@@ -309,6 +455,12 @@
     <script
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+      integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+      crossorigin="anonymous"
     ></script>
 
     <script src="../app.js"></script>

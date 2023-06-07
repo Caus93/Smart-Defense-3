@@ -67,6 +67,10 @@ h1 {
   text-align: center;
 }
 
+.validate-error {
+  border: 1px solid red;
+}
+
 /* Iconos Section */
 
 .icon-check-color {
