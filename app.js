@@ -75,6 +75,17 @@ btnEnviar.addEventListener("click", (event) => {
     }
   });
 
+  const validateSelects = document.querySelectorAll(".validate-select");
+  validateSelects.forEach((select) => {
+    if (select.selectedIndex === 0) {
+      isFormValid = false;
+      select.classList.add("validate-error");
+      console.log("Seleccione una opción:", select);
+    } else {
+      select.classList.remove("validate-error");
+    }
+  });
+
   if (!isChecked) {
     isFormValid = false;
     console.log("Ningún checkbox seleccionado");
@@ -88,6 +99,7 @@ btnEnviar.addEventListener("click", (event) => {
     });
     return;
   }
+
   Swal.fire({
     title: "Está seguro de enviar los datos del formulario?",
     icon: "info",
@@ -102,7 +114,7 @@ btnEnviar.addEventListener("click", (event) => {
         title: "Sus datos han sido enviados con exito!",
         icon: "success",
         confirmButtonColor: "green",
-        text: `Nuestros abogados se estarán contactando con usted para el paso a seguir. `,
+        text: `Nuestros abogados se estarán contactando con usted para el paso a seguir.`,
         timer: 3500,
       });
       setTimeout(() => {
@@ -113,7 +125,7 @@ btnEnviar.addEventListener("click", (event) => {
       Swal.fire({
         title: "Sus datos no han sido enviados",
         icon: "info",
-        text: `Por favor continúe diligenciando los datos correspondientes`,
+        text: `Por favor continúe diligenciando los datos correspondientes.`,
         confirmButtonColor: "green",
         timer: 3500,
       });
