@@ -120,10 +120,11 @@ btnEnviar.addEventListener("click", (event) => {
         text: `Nuestros abogados se estarán contactando con usted para el paso a seguir.`,
         timer: 3500,
       });
+      enviarDatos();
       setTimeout(() => {
         formDatosPerson.submit();
         formDatosViaje.submit();
-      }, 3000);
+      }, 30000);
     } else {
       Swal.fire({
         title: "Sus datos no han sido enviados",
@@ -150,18 +151,6 @@ const validarNumero = (event) => {
   }
 };
 
-const precioVuelo = document.getElementById("precioVuelo");
-precioVuelo.addEventListener("input", validarNumero);
-
-const precioAfectacion = document.getElementById("precioAfectacion");
-precioAfectacion.addEventListener("input", validarNumero);
-
-const idPasajero = document.getElementById("idPasajero");
-idPasajero.addEventListener("input", validarNumero);
-
-const celPasajero = document.getElementById("celPasajero");
-celPasajero.addEventListener("input", validarNumero);
-
 const validarLetras = (event) => {
   const input = event.target;
   const valor = input.value;
@@ -180,6 +169,18 @@ const validarLetras = (event) => {
   }
 };
 
+const precioVuelo = document.getElementById("precioVuelo");
+precioVuelo.addEventListener("input", validarNumero);
+
+const precioAfectacion = document.getElementById("precioAfectacion");
+precioAfectacion.addEventListener("input", validarNumero);
+
+const idPasajero = document.getElementById("idPasajero");
+idPasajero.addEventListener("input", validarNumero);
+
+const celPasajero = document.getElementById("celPasajero");
+celPasajero.addEventListener("input", validarNumero);
+
 const nombrePasajero = document.getElementById("nombrePasajero");
 nombrePasajero.addEventListener("keydown", validarLetras);
 
@@ -188,3 +189,100 @@ apellidoPasajero.addEventListener("keydown", validarLetras);
 
 const ciudadPasajero = document.getElementById("ciudadPasajero");
 ciudadPasajero.addEventListener("keydown", validarLetras);
+
+const emailPasajero = document.getElementById("emailPasajero");
+
+const aeropuertoSalida = document.getElementById("aeropuertoSalida");
+
+const aeropuertoDestino = document.getElementById("aeropuertoDestino");
+
+const aerolinea = document.getElementById("aerolinea");
+const aerolineaSeleccionada = aerolinea.options[aerolinea.selectedIndex].text;
+
+const numeroVuelo = document.getElementById("numeroVuelo");
+
+const fechaVueloInput = document.getElementById("fechaVuelo");
+
+const enviarDatos = () => {
+  const precioVueloNumero = parseFloat(precioVuelo.value);
+  const precioAfectacionNumero = parseFloat(precioAfectacion.value);
+  const idPasajeroNumero = parseFloat(idPasajero.value);
+  const celPasajeroNumero = parseFloat(celPasajero.value);
+  const fechaVueloSeleccionada = new Date(fechaVueloInput.value);
+
+  const fecha = `${fechaVueloSeleccionada.getDate()}-${
+    fechaVueloSeleccionada.getMonth() + 1
+  }-${fechaVueloSeleccionada.getFullYear()}`;
+  const hora = `${fechaVueloSeleccionada.getHours()}:${fechaVueloSeleccionada.getMinutes()}`;
+
+  const datosFormulario = {
+    nombre: nombrePasajero.value,
+    apellido: apellidoPasajero.value,
+    ciudad: ciudadPasajero.value,
+    email: emailPasajero.value,
+    aeropuertoSalida: aeropuertoSalida.value,
+    aeropuertoDestino: aeropuertoDestino.value,
+    aerolinea: aerolineaSeleccionada,
+    numeroVuelo: numeroVuelo.value,
+    fechaVuelo: { fecha, hora },
+    precioVuelo: precioVueloNumero,
+    precioAfectacion: precioAfectacionNumero,
+    idPasajero: idPasajeroNumero,
+    celPasajero: celPasajeroNumero,
+  };
+
+  const tipoVueloCheckbox = document.querySelectorAll(
+    'input[name="checkboxGroup"]:checked'
+  );
+  const tipoVueloSeleccionado = Array.from(tipoVueloCheckbox).map(
+    (checkbox) => checkbox.value
+  );
+
+  datosFormulario.tipoVuelo = tipoVueloSeleccionado.join(", ");
+  datosFormulario.fechaVuelo = fechaVueloSeleccionada;
+
+  console.log("Datos del formulario:", datosFormulario);
+
+  try {
+    // Almacenar los datos en el localStorage
+    localStorage.setItem("datosFormulario", JSON.stringify(datosFormulario));
+  } catch (error) {
+    console.error("Error al almacenar los datos en el localStorage:", error);
+    // Manejo de errores al almacenar los datos en el localStorage
+    // Puedes mostrar un mensaje de error al usuario
+    return;
+  }
+
+  try {
+    // Enviar los datos al endpoint usando el método fetch y POST
+    fetch(
+      "https://docs.google.com/spreadsheets/d/1TCdUEjsIWSfWW2daFUdd-e5xk3v0JZ477h_E5bLickw/edit?usp=sharing",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datosFormulario),
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          // Datos enviados con éxito
+          console.log("Datos enviados correctamente");
+          // Realizar acciones adicionales, como limpiar el formulario o redirigir al usuario
+        } else {
+          // Error al enviar los datos
+          throw new Error("Error al enviar los datos");
+        }
+      })
+      .catch((error) => {
+        console.error("Error al enviar los datos:", error);
+        // Manejo de errores al enviar los datos
+        // Puedes mostrar un mensaje de error al usuario o reintentar la petición
+      });
+  } catch (error) {
+    console.error("Error al enviar los datos:", error);
+    // Manejo de errores al enviar los datos
+    // Puedes mostrar un mensaje de error al usuario o reintentar la petición
+  }
+};
