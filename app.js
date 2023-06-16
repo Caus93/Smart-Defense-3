@@ -13,7 +13,7 @@ checkbox2.addEventListener("change", () => {
 
 /* Fechas y horas */
 
-const fechaVuelo = () => {
+/* const fechaVuelo = () => {
   $('input[name="fechaVuelo"]').daterangepicker({
     singleDatePicker: true,
     showDropdowns: true,
@@ -21,6 +21,27 @@ const fechaVuelo = () => {
     maxYear: parseInt(moment().format("YYYY"), 10),
     timePicker: true,
     locale: {
+      applyLabel: "Aplicar",
+      cancelLabel: "Cancelar",
+    },
+  });
+};
+
+$(document).ready(function () {
+  fechaVuelo();
+}); */
+
+const fechaVuelo = () => {
+  $('input[name="fechaVuelo"]').daterangepicker({
+    singleDatePicker: true,
+    showDropdowns: true,
+    minYear: 1901,
+    maxYear: parseInt(moment().format("YYYY"), 10),
+    timePicker: true,
+    timePicker12Hour: true, // Establece el formato de 24 horas para la selección de la hora
+    timePickerIncrement: 1, // Incremento en minutos para la selección de la hora
+    locale: {
+      format: "YYYY-MM-DD hh:mm A", // Formato de fecha y hora
       applyLabel: "Aplicar",
       cancelLabel: "Cancelar",
     },
@@ -124,7 +145,7 @@ btnEnviar.addEventListener("click", (event) => {
       setTimeout(() => {
         formDatosPerson.submit();
         formDatosViaje.submit();
-      }, 30000);
+      }, 3000);
     } else {
       Swal.fire({
         title: "Sus datos no han sido enviados",
@@ -208,12 +229,7 @@ const enviarDatos = () => {
   const precioAfectacionNumero = parseFloat(precioAfectacion.value);
   const idPasajeroNumero = parseFloat(idPasajero.value);
   const celPasajeroNumero = parseFloat(celPasajero.value);
-  const fechaVueloSeleccionada = new Date(fechaVueloInput.value);
-
-  const fecha = `${fechaVueloSeleccionada.getDate()}-${
-    fechaVueloSeleccionada.getMonth() + 1
-  }-${fechaVueloSeleccionada.getFullYear()}`;
-  const hora = `${fechaVueloSeleccionada.getHours()}:${fechaVueloSeleccionada.getMinutes()}`;
+  const fechaVueloSeleccionada = $('input[name="fechaVuelo"]')[0].value;
 
   const datosFormulario = {
     nombre: nombrePasajero.value,
@@ -224,7 +240,7 @@ const enviarDatos = () => {
     aeropuertoDestino: aeropuertoDestino.value,
     aerolinea: aerolineaSeleccionada,
     numeroVuelo: numeroVuelo.value,
-    fechaVuelo: { fecha, hora },
+    fechaVuelo: fechaVueloSeleccionada,
     precioVuelo: precioVueloNumero,
     precioAfectacion: precioAfectacionNumero,
     idPasajero: idPasajeroNumero,
@@ -253,7 +269,7 @@ const enviarDatos = () => {
     return;
   }
 
-  try {
+  /*   try {
     // Enviar los datos al endpoint usando el método fetch y POST
     fetch(
       "https://docs.google.com/spreadsheets/d/1TCdUEjsIWSfWW2daFUdd-e5xk3v0JZ477h_E5bLickw/edit?usp=sharing",
@@ -284,5 +300,17 @@ const enviarDatos = () => {
     console.error("Error al enviar los datos:", error);
     // Manejo de errores al enviar los datos
     // Puedes mostrar un mensaje de error al usuario o reintentar la petición
-  }
+  } */
 };
+
+/* Tooltip */
+
+let tooltipTriggerList = [].slice.call(
+  document.querySelectorAll('[data-bs-toggle="tooltip"]')
+);
+let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl, {
+    template:
+      '<div class="tooltip tooltip-blue" role="tooltip"><div class="tooltip-inner"></div></div>',
+  });
+});
