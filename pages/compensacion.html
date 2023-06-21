@@ -56,6 +56,8 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
     />
+
+    <!--     <script src="https://accounts.google.com/gsi/client" async defer></script> -->
   </head>
   <body>
     <header>
@@ -111,6 +113,42 @@
                   >Vamos a comprobar si la aerolínea debería compensarte</strong
                 >
               </h5>
+
+              <!-- Autenticación -->
+
+              <!--               <div
+                id="g_id_onload"
+                data-client_id="927847270096-m4lrqakur4u675drcsqjm3a1b871qa32.apps.googleusercontent.com"
+                data-callback="handleCredentialResponse"
+              > -->
+              <p>Sheets API Quickstart</p>
+
+              <!--Add buttons to initiate auth sequence and sign out-->
+              <button id="authorize_button" onclick="handleAuthClick()">
+                Authorize
+              </button>
+              <button id="signout_button" onclick="handleSignoutClick()">
+                Sign Out
+              </button>
+
+              <script
+                async
+                defer
+                src="https://apis.google.com/js/api.js"
+                id="gapi"
+              ></script>
+              <script
+                async
+                defer
+                src="https://accounts.google.com/gsi/client"
+                id="gis"
+              ></script>
+              <script async defer src="../sheets.js"></script>
+              <script async defer src="../auth.js"></script>
+              <!--               </div> -->
+              <!--               <div class="g_id_signin" data-type="standard"></div> -->
+
+              <!-- Form -->
               <form id="form-datosViaje">
                 <div class="row g-3 mb-3">
                   <div class="d-flex flex-column flex-md-row">
@@ -443,6 +481,7 @@
         </ul>
       </footer>
     </div>
+
     <!-- Bootstrap JavaScript Libraries -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
