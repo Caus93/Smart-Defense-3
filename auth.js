@@ -1,7 +1,11 @@
 // TODO(developer): Set to client ID and API key from the Developer Console
-const CLIENT_ID =
+/* const CLIENT_ID =
   "927847270096-m4lrqakur4u675drcsqjm3a1b871qa32.apps.googleusercontent.com";
-const API_KEY = "AIzaSyA6Xe4u2ifVuiXsd1kPQKmX3JcXTDGG0LM";
+const API_KEY = "AIzaSyA6Xe4u2ifVuiXsd1kPQKmX3JcXTDGG0LM"; */
+
+const CLIENT_ID =
+  "714263892609-5ro523qd4j4filjdp64um2phbik8m9e4.apps.googleusercontent.com";
+const API_KEY = "AIzaSyBqvfg0n5tabl423rscazqMrJbRSjKn5Gk";
 
 // Discovery doc URL for APIs used by the quickstart
 const DISCOVERY_DOC =
@@ -73,7 +77,6 @@ function handleAuthClick() {
     }
     document.getElementById("signout_button").style.visibility = "visible";
     document.getElementById("authorize_button").innerText = "Refrescar";
-    await getInfoFormSheet();
   };
 
   if (gapi.client.getToken() === null) {
@@ -97,6 +100,18 @@ function handleSignoutClick() {
     document.getElementById("content").innerText = "";
     document.getElementById("authorize_button").innerText = "Authorize";
     document.getElementById("signout_button").style.visibility = "hidden";
+  }
+}
+
+function usuarioHaIniciadoSesion() {
+  const token = gapi.client.getToken();
+
+  if (token && !token.error && token.access_token) {
+    // El usuario ha iniciado sesión en Google
+    return true;
+  } else {
+    // El usuario no ha iniciado sesión en Google
+    return false;
   }
 }
 

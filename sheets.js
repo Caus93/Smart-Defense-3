@@ -1,10 +1,10 @@
-let datosForm;
+/* let datosForm;
 
 async function getInfoFormSheet() {
   let response;
   try {
     response = await gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: "1b1eauWs87c3uyCHYGYLC2Tv2_ByA6bW3YgPNf-NCcxU",
+      spreadsheetId: "12Y1J7SBNm_Xg9R6YHC1PyMecr-XtlX0O8lBamN4urM8",
       range: "informacion_clientes!A:N",
     });
   } catch (err) {
@@ -40,7 +40,7 @@ async function getInfoFormSheet() {
     arrayInfo.push(nuevoForm);
   });
   console.log(arrayInfo);
-}
+} */
 
 let arrayInfo = [];
 
@@ -52,12 +52,18 @@ localStorage.getItem("datosFormulario")
 async function agregarDatosSheet(datos) {
   const aerolineaSeleccionada =
     aerolinea.options[aerolinea.selectedIndex].textContent;
+  const causalNalSeleccionada =
+    causalNal.options[causalNal.selectedIndex].textContent;
+  const causalIntlSeleccionada =
+    causalIntl.options[causalIntl.selectedIndex].textContent;
   const update = [
     datos.id,
     datos.aeropuertoSalida,
     datos.aeropuertoDestino,
     datos.tipoVuelo,
     aerolineaSeleccionada,
+    causalNalSeleccionada,
+    causalIntlSeleccionada,
     datos.numeroVuelo,
     datos.fechaVuelo,
     datos.precioVuelo,
@@ -72,7 +78,7 @@ async function agregarDatosSheet(datos) {
 
   // Realizar la solicitud de actualización de datos en el archivo de Google Sheets
   const response = await gapi.client.sheets.spreadsheets.values.append({
-    spreadsheetId: "1b1eauWs87c3uyCHYGYLC2Tv2_ByA6bW3YgPNf-NCcxU",
+    spreadsheetId: "12Y1J7SBNm_Xg9R6YHC1PyMecr-XtlX0O8lBamN4urM8",
     range: "informacion_clientes!A:N",
     valueInputOption: "USER_ENTERED",
     resource: {
@@ -85,7 +91,7 @@ async function agregarDatosSheet(datos) {
 
 async function generarId() {
   const response = await gapi.client.sheets.spreadsheets.values.get({
-    spreadsheetId: "1b1eauWs87c3uyCHYGYLC2Tv2_ByA6bW3YgPNf-NCcxU",
+    spreadsheetId: "12Y1J7SBNm_Xg9R6YHC1PyMecr-XtlX0O8lBamN4urM8",
     range: "informacion_clientes!A:A",
     majorDimension: "COLUMNS",
   });
@@ -105,26 +111,3 @@ async function generarId() {
 
   return id;
 }
-
-/* async function generarId() {
-    const response = await gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: "1b1eauWs87c3uyCHYGYLC2Tv2_ByA6bW3YgPNf-NCcxU",
-      range: "informacion_clientes!A:A",
-      majorDimension: "COLUMNS",
-    });
-  
-    const data = response.result.values;
-  
-    let id = 1;
-  
-    if (data && data.length > 0) {
-      const columnValues = data[0];
-      const maxId = Math.max(...columnValues.filter((value) => !isNaN(value)));
-  
-      if (!isNaN(maxId)) {
-        id = maxId + 1;
-      }
-    }
-  
-    return id;
-  } */

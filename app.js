@@ -57,6 +57,16 @@ btnAtras.addEventListener("click", (event) => {
 btnEnviar.addEventListener("click", (event) => {
   event.preventDefault();
 
+  if (!usuarioHaIniciadoSesion()) {
+    Swal.fire({
+      title:
+        "Por favor, inicia sesión en Google antes de enviar los datos del formulario.",
+      icon: "warning",
+      confirmButtonColor: "red",
+    });
+    return;
+  }
+
   const checkboxInputs = document.querySelectorAll(".checkbox-input");
   let isFormValid = true;
   let isChecked = false;
@@ -202,76 +212,16 @@ const aeropuertoDestino = document.getElementById("aeropuertoDestino");
 const aerolinea = document.getElementById("aerolinea");
 const aerolineaSeleccionada = aerolinea.options[aerolinea.selectedIndex].text;
 
+const causalNal = document.getElementById("causalNal");
+const causalNalSeleccionada = causalNal.options[aerolinea.selectedIndex].text;
+
+const causalIntl = document.getElementById("causalIntl");
+const causalIntlSeleccionada = causalIntl.options[aerolinea.selectedIndex].text;
+
 const numeroVuelo = document.getElementById("numeroVuelo");
 
 const fechaVueloInput = document.getElementById("fechaVuelo");
 
-/* Función autenticación e inicio de sesión */
-
-/* let accesstoken;
-
-function handleCredentialResponse(response) {
-  accesstoken = response.credential;
-  // Utiliza el token de acceso en tus solicitudes a la API de Google Sheets
-  console.log("Token de acceso:", accesstoken);
-
-  // ... código para enviar los datos a la API de Google Sheets
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  loadGoogleSignIn();
-});
-
-function handleSignInClick() {
-  gapi.load("client:auth2", initClient);
-}
-
-function initClient() {
-  gapi.client
-    .init({
-      apiKey: "AIzaSyA6Xe4u2ifVuiXsd1kPQKmX3JcXTDGG0LM",
-      clientId:
-        "927847270096-m4lrqakur4u675drcsqjm3a1b871qa32.apps.googleusercontent.com",
-      scope: "https://www.googleapis.com/auth/spreadsheets",
-      discoveryDocs: [
-        "https://sheets.googleapis.com/$discovery/rest?version=v4",
-      ],
-    })
-    .then(
-      function () {
-        // Autenticación exitosa
-        console.log("Autenticación exitosa");
-        gapi.auth2
-          .getAuthInstance()
-          .signIn()
-          .then(function (result) {
-            handleCredentialResponse(result);
-          });
-      },
-      function (error) {
-        // Error de autenticación
-        console.error("Error de autenticación:", error);
-      }
-    );
-}
-
-const btnSignIn = document.getElementById("btn-sign-in");
-btnSignIn.addEventListener("click", handleSignInClick);
-
-function loadGoogleSignIn() {
-  google.accounts.id.initialize({
-    client_id:
-      "927847270096-m4lrqakur4u675drcsqjm3a1b871qa32.apps.googleusercontent.com",
-    callback: handleCredentialResponse,
-    auto_select: true,
-  });
-  google.accounts.id.prompt();
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  loadGoogleSignIn();
-});
- */
 /* Función enviar datos */
 
 async function enviarDatos() {
@@ -289,6 +239,8 @@ async function enviarDatos() {
     aeropuertoSalida: aeropuertoSalida.value,
     aeropuertoDestino: aeropuertoDestino.value,
     aerolinea: aerolineaSeleccionada,
+    causalNal: causalNalSeleccionada,
+    causalIntl: causalIntlSeleccionada,
     numeroVuelo: numeroVuelo.value,
     fechaVuelo: fechaVueloSeleccionada,
     precioVuelo: precioVueloNumero,
