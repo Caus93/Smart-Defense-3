@@ -23,13 +23,13 @@ const fechaVuelo = () => {
     timePicker12Hour: true, // Establece el formato de 24 horas para la selección de la hora
     timePickerIncrement: 1, // Incremento en minutos para la selección de la hora
     locale: {
-      format: "YYYY-MM-DD hh:mm A", // Formato de fecha y hora
+      format: "DD/MM/YYYY hh:mm A", // Formato de fecha y hora
       applyLabel: "Aplicar",
       cancelLabel: "Cancelar",
     },
   });
 };
-
+/* YYYY-MM-DD hh:mm A */
 $(document).ready(function () {
   fechaVuelo();
 });
