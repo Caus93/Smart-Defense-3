@@ -443,3 +443,49 @@ async function agregarDatosSheet(dat) {
     arrayInfo.emailPasajero,
     arrayInfo.celPasajero,
     arrayInfo.ciudadPasajero, */
+
+/* Sheets */
+
+/* let datosForm;
+
+async function getInfoFormSheet() {
+  let response;
+  try {
+    response = await gapi.client.sheets.spreadsheets.values.get({
+      spreadsheetId: "12Y1J7SBNm_Xg9R6YHC1PyMecr-XtlX0O8lBamN4urM8",
+      range: "informacion_clientes!A:N",
+    });
+  } catch (err) {
+    console.error(err);
+    return;
+  }
+  const range = response.result;
+  if (!range || !range.values || range.values.length == 0) {
+    console.warn("No se encontraron valores");
+    return;
+  }
+
+  datosForm = [];
+  range.values.forEach((fila) => {
+    if (isNaN(parseInt(fila[0])) || fila[5] !== undefined) return;
+    const nuevoForm = {
+      id: fila[0],
+      aeropuertoSalida: fila[1],
+      aeropuertoDestino: fila[2],
+      tipoVuelo: fila[3],
+      aerolinea: fila[4],
+      numeroVuelo: fila[5],
+      fechaVuelo: fila[6],
+      precioVuelo: fila[7],
+      precioAfectacion: fila[8],
+      nombrePasajero: fila[9],
+      apellidoPasajero: fila[10],
+      idPasajero: fila[11],
+      emailPasajero: fila[12],
+      celPasajero: fila[13],
+      ciudadPasajero: fila[14],
+    };
+    arrayInfo.push(nuevoForm);
+  });
+  console.log(arrayInfo);
+} */

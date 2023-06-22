@@ -56,8 +56,6 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
     />
-
-    <!--     <script src="https://accounts.google.com/gsi/client" async defer></script> -->
   </head>
   <body>
     <header>
@@ -93,7 +91,7 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">¿Quiénes Somos?</a>
+                <a class="nav-link" href="quienesSomos.html">¿Quiénes Somos?</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#"><i class="bi bi-cart"></i></a>
@@ -116,11 +114,6 @@
 
               <!-- Autenticación -->
 
-              <!--               <div
-                id="g_id_onload"
-                data-client_id="927847270096-m4lrqakur4u675drcsqjm3a1b871qa32.apps.googleusercontent.com"
-                data-callback="handleCredentialResponse"
-              > -->
               <div
                 class="d-flex justify-content-center flex-column align-items-center"
               >
@@ -157,10 +150,8 @@
                 src="https://accounts.google.com/gsi/client"
                 id="gis"
               ></script>
-              <script async defer src="../sheets.js"></script>
-              <script async defer src="../auth.js"></script>
-              <!--               </div> -->
-              <!--               <div class="g_id_signin" data-type="standard"></div> -->
+              <script async defer src="../js/sheets.js"></script>
+              <script async defer src="../js/auth.js"></script>
 
               <!-- Form -->
               <form id="form-datosViaje">
@@ -318,7 +309,7 @@
                       >
                         <option selected>Seleccione la causal</option>
                         <option value="1">NO APLICA ESTA CAUSAL</option>
-                        <option value="2">RETRASO DE UNA HORAS</option>
+                        <option value="2">RETRASO DE UNA HORA</option>
                         <option value="3">RETRASO DE TRES HORAS</option>
                         <option value="4">RETRASO DE CINCO HORAS</option>
                         <option value="5">
@@ -641,6 +632,6 @@
       crossorigin="anonymous"
     ></script>
 
-    <script src="../app.js"></script>
+    <script src="../js/app.js"></script>
   </body>
 </html>
