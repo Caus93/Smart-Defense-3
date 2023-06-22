@@ -121,16 +121,30 @@
                 data-client_id="927847270096-m4lrqakur4u675drcsqjm3a1b871qa32.apps.googleusercontent.com"
                 data-callback="handleCredentialResponse"
               > -->
-              <p>Sheets API Quickstart</p>
+              <div
+                class="d-flex justify-content-center flex-column align-items-center"
+              >
+                <p class="subtitle-color text-center">
+                  Primero debes iniciar sesión con Google para que puedas usar
+                  nuestros servicios
+                </p>
 
-              <!--Add buttons to initiate auth sequence and sign out-->
-              <button id="authorize_button" onclick="handleAuthClick()">
-                Authorize
-              </button>
-              <button id="signout_button" onclick="handleSignoutClick()">
-                Sign Out
-              </button>
-
+                <!--Add buttons to initiate auth sequence and sign out-->
+                <button
+                  id="authorize_button"
+                  class="btn btn-secondary btn-shadow btn-maincolor custom-btn mb-2"
+                  onclick="handleAuthClick()"
+                >
+                  Iniciar Sesión
+                </button>
+                <button
+                  id="signout_button"
+                  class="btn btn-secondary btn-shadow btn-maincolor custom-btn mb-3"
+                  onclick="handleSignoutClick()"
+                >
+                  Cerrar Sesión
+                </button>
+              </div>
               <script
                 async
                 defer

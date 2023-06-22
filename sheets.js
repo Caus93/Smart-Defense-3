@@ -49,47 +49,82 @@ localStorage.getItem("datosFormulario")
   : ((arrayInfo = []),
     localStorage.setItem("datosFormulario", JSON.stringify(arrayInfo)));
 
-async function agregarDatosSheet(arrayInfo) {
+async function agregarDatosSheet(datos) {
+  const aerolineaSeleccionada =
+    aerolinea.options[aerolinea.selectedIndex].textContent;
   const update = [
-    arrayInfo.id,
-    arrayInfo.aeropuertoSalida,
-    arrayInfo.aeropuertoDestino,
-    arrayInfo.tipoVuelo,
-    arrayInfo.aerolinea,
-    arrayInfo.numeroVuelo,
-    arrayInfo.fechaVuelo,
-    arrayInfo.precioVuelo,
-    arrayInfo.precioAfectacion,
-    arrayInfo.nombrePasajero,
-    arrayInfo.apellidoPasajero,
-    arrayInfo.idPasajero,
-    arrayInfo.emailPasajero,
-    arrayInfo.celPasajero,
-    arrayInfo.ciudadPasajero,
+    datos.id,
+    datos.aeropuertoSalida,
+    datos.aeropuertoDestino,
+    datos.tipoVuelo,
+    aerolineaSeleccionada,
+    datos.numeroVuelo,
+    datos.fechaVuelo,
+    datos.precioVuelo,
+    datos.precioAfectacion,
+    datos.nombre,
+    datos.apellido,
+    datos.idPasajero,
+    datos.email,
+    datos.celPasajero,
+    datos.ciudad,
   ];
-  console.log(update);
-  const filaAEditar = parseInt(arrayInfo.id) + 1;
-  const response = await gapi.client.sheets.spreadsheets.values.update({
+
+  // Realizar la solicitud de actualización de datos en el archivo de Google Sheets
+  const response = await gapi.client.sheets.spreadsheets.values.append({
     spreadsheetId: "1b1eauWs87c3uyCHYGYLC2Tv2_ByA6bW3YgPNf-NCcxU",
-    range: `informacion_clientes!A${filaAEditar}:N${filaAEditar}`,
-    values: [update],
+    range: "informacion_clientes!A:N",
     valueInputOption: "USER_ENTERED",
+    resource: {
+      values: [update],
+    },
   });
-  return response;
+
+  console.log("Datos agregados al archivo de Google Sheets:", response);
 }
 
-/*     dat.id,
-    dat.aeropuertoSalida,
-    dat.aeropuertoDestino,
-    dat.tipoVuelo,
-    dat.aerolinea,
-    dat.numeroVuelo,
-    dat.fechaVuelo,
-    dat.precioVuelo,
-    dat.precioAfectacion,
-    dat.nombrePasajero,
-    dat.apellidoPasajero,
-    dat.idPasajero,
-    dat.emailPasajero,
-    dat.celPasajero,
-    dat.ciudadPasajero, */
+async function generarId() {
+  const response = await gapi.client.sheets.spreadsheets.values.get({
+    spreadsheetId: "1b1eauWs87c3uyCHYGYLC2Tv2_ByA6bW3YgPNf-NCcxU",
+    range: "informacion_clientes!A:A",
+    majorDimension: "COLUMNS",
+  });
+
+  const data = response.result.values;
+
+  let id = 1;
+
+  if (data && data.length > 0) {
+    const columnValues = data[0];
+    const maxId = Math.max(...columnValues.filter((value) => !isNaN(value)));
+
+    if (!isNaN(maxId) && maxId >= 1) {
+      id = maxId + 1;
+    }
+  }
+
+  return id;
+}
+
+/* async function generarId() {
+    const response = await gapi.client.sheets.spreadsheets.values.get({
+      spreadsheetId: "1b1eauWs87c3uyCHYGYLC2Tv2_ByA6bW3YgPNf-NCcxU",
+      range: "informacion_clientes!A:A",
+      majorDimension: "COLUMNS",
+    });
+  
+    const data = response.result.values;
+  
+    let id = 1;
+  
+    if (data && data.length > 0) {
+      const columnValues = data[0];
+      const maxId = Math.max(...columnValues.filter((value) => !isNaN(value)));
+  
+      if (!isNaN(maxId)) {
+        id = maxId + 1;
+      }
+    }
+  
+    return id;
+  } */

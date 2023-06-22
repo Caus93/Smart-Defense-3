@@ -127,7 +127,7 @@ btnEnviar.addEventListener("click", (event) => {
       setTimeout(() => {
         formDatosPerson.submit();
         formDatosViaje.submit();
-      }, 30000);
+      }, 4000);
     } else {
       Swal.fire({
         title: "Sus datos no han sido enviados",
@@ -274,7 +274,7 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 /* Función enviar datos */
 
-const enviarDatos = () => {
+async function enviarDatos() {
   const precioVueloNumero = parseFloat(precioVuelo.value);
   const precioAfectacionNumero = parseFloat(precioAfectacion.value);
   const idPasajeroNumero = parseFloat(idPasajero.value);
@@ -310,59 +310,32 @@ const enviarDatos = () => {
   console.log("Datos del formulario:", datosFormulario);
 
   try {
+    // Obtener el ID consecutivo
+    const idConsecutivo = await generarId();
+
+    // Asignar el ID al objeto datosFormulario
+    datosFormulario.id = idConsecutivo;
+
     // Almacenar los datos en el localStorage
     localStorage.setItem("datosFormulario", JSON.stringify(datosFormulario));
-  } catch (error) {
-    console.error("Error al almacenar los datos en el localStorage:", error);
-    // Manejo de errores al almacenar los datos en el localStorage
-    // Puedes mostrar un mensaje de error al usuario
-    return;
-  }
 
-  agregarDatosSheet(datosFormulario);
-
-  /*   try {
-    // Enviar los datos al endpoint usando el método fetch y POST
-    fetch(
-      "https://sheets.googleapis.com/v4/spreadsheets/{1b1eauWs87c3uyCHYGYLC2Tv2_ByA6bW3YgPNf-NCcxU}/values/{informacion_clientes}!A1:N20",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-        body: JSON.stringify(datosFormulario),
-      }
-    )
-      .then((response) => {
-        if (response.ok) {
-          // Datos enviados con éxito
-          console.log("Datos enviados correctamente");
-          // Realizar acciones adicionales, como limpiar el formulario o redirigir al usuario
-        } else {
-          // Error al enviar los datos
-          throw new Error("Error al enviar los datos");
-        }
-      })
-      .catch((error) => {
-        console.error("Error al enviar los datos:", error);
-        // Manejo de errores al enviar los datos
-        // Puedes mostrar un mensaje de error al usuario o reintentar la petición
-      });
+    // Agregar los datos al archivo de Google Sheets
+    await agregarDatosSheet(datosFormulario);
   } catch (error) {
     console.error("Error al enviar los datos:", error);
     // Manejo de errores al enviar los datos
-    // Puedes mostrar un mensaje de error al usuario o reintentar la petición
-  } */
-};
+    // Puedes mostrar un mensaje de error al usuario
+    return;
+  }
+}
 
 /* Tooltip */
 
 let tooltipTriggerList = [].slice.call(
   document.querySelectorAll('[data-bs-toggle="tooltip"]')
 );
-let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl, {
+let tooltipList = tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+  new bootstrap.Tooltip(tooltipTriggerEl, {
     template:
       '<div class="tooltip tooltip-blue" role="tooltip"><div class="tooltip-inner"></div></div>',
   });

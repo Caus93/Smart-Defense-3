@@ -303,3 +303,143 @@ let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
       '<div class="tooltip tooltip-blue" role="tooltip"><div class="tooltip-inner"></div></div>',
   });
 });
+
+const enviarDatos = () => {
+  const precioVueloNumero = parseFloat(precioVuelo.value);
+  const precioAfectacionNumero = parseFloat(precioAfectacion.value);
+  const idPasajeroNumero = parseFloat(idPasajero.value);
+  const celPasajeroNumero = parseFloat(celPasajero.value);
+  const fechaVueloSeleccionada = $('input[name="fechaVuelo"]')[0].value;
+
+  const datosFormulario = {
+    nombre: nombrePasajero.value,
+    apellido: apellidoPasajero.value,
+    ciudad: ciudadPasajero.value,
+    email: emailPasajero.value,
+    aeropuertoSalida: aeropuertoSalida.value,
+    aeropuertoDestino: aeropuertoDestino.value,
+    aerolinea: aerolineaSeleccionada,
+    numeroVuelo: numeroVuelo.value,
+    fechaVuelo: fechaVueloSeleccionada,
+    precioVuelo: precioVueloNumero,
+    precioAfectacion: precioAfectacionNumero,
+    idPasajero: idPasajeroNumero,
+    celPasajero: celPasajeroNumero,
+  };
+
+  const tipoVueloCheckbox = document.querySelectorAll(
+    'input[name="checkboxGroup"]:checked'
+  );
+  const tipoVueloSeleccionado = Array.from(tipoVueloCheckbox).map(
+    (checkbox) => checkbox.value
+  );
+
+  datosFormulario.tipoVuelo = tipoVueloSeleccionado.join(", ");
+  datosFormulario.fechaVuelo = fechaVueloSeleccionada;
+
+  console.log("Datos del formulario:", datosFormulario);
+
+  try {
+    // Almacenar los datos en el localStorage
+    localStorage.setItem("datosFormulario", JSON.stringify(datosFormulario));
+  } catch (error) {
+    console.error("Error al almacenar los datos en el localStorage:", error);
+    // Manejo de errores al almacenar los datos en el localStorage
+    // Puedes mostrar un mensaje de error al usuario
+    return;
+  }
+
+  agregarDatosSheet(datosFormulario);
+
+  /*   try {
+    // Enviar los datos al endpoint usando el método fetch y POST
+    fetch(
+      "https://sheets.googleapis.com/v4/spreadsheets/{1b1eauWs87c3uyCHYGYLC2Tv2_ByA6bW3YgPNf-NCcxU}/values/{informacion_clientes}!A1:N20",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(datosFormulario),
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          // Datos enviados con éxito
+          console.log("Datos enviados correctamente");
+          // Realizar acciones adicionales, como limpiar el formulario o redirigir al usuario
+        } else {
+          // Error al enviar los datos
+          throw new Error("Error al enviar los datos");
+        }
+      })
+      .catch((error) => {
+        console.error("Error al enviar los datos:", error);
+        // Manejo de errores al enviar los datos
+        // Puedes mostrar un mensaje de error al usuario o reintentar la petición
+      });
+  } catch (error) {
+    console.error("Error al enviar los datos:", error);
+    // Manejo de errores al enviar los datos
+    // Puedes mostrar un mensaje de error al usuario o reintentar la petición
+  } */
+};
+
+/* Tooltip */
+
+let tooltipTriggerList = [].slice.call(
+  document.querySelectorAll('[data-bs-toggle="tooltip"]')
+);
+let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl, {
+    template:
+      '<div class="tooltip tooltip-blue" role="tooltip"><div class="tooltip-inner"></div></div>',
+  });
+});
+
+async function agregarDatosSheet(dat) {
+  const update = [
+    dat.id,
+    dat.aeropuertoSalida,
+    dat.aeropuertoDestino,
+    dat.tipoVuelo,
+    dat.aerolinea,
+    dat.numeroVuelo,
+    dat.fechaVuelo,
+    dat.precioVuelo,
+    dat.precioAfectacion,
+    dat.nombrePasajero,
+    dat.apellidoPasajero,
+    dat.idPasajero,
+    dat.emailPasajero,
+    dat.celPasajero,
+    dat.ciudadPasajero,
+  ];
+  console.log(update);
+  const filaAEditar = parseInt(dat.id) + 1;
+  const response = await gapi.client.sheets.spreadsheets.values.update({
+    spreadsheetId: "1b1eauWs87c3uyCHYGYLC2Tv2_ByA6bW3YgPNf-NCcxU",
+    range: `informacion_clientes!A${filaAEditar}:N${filaAEditar}`,
+    values: [update],
+    valueInputOption: "USER_ENTERED",
+  });
+  return response;
+}
+
+/* 
+    arrayInfo.id,
+    arrayInfo.aeropuertoSalida,
+    arrayInfo.aeropuertoDestino,
+    arrayInfo.tipoVuelo,
+    arrayInfo.aerolinea,
+    arrayInfo.numeroVuelo,
+    arrayInfo.fechaVuelo,
+    arrayInfo.precioVuelo,
+    arrayInfo.precioAfectacion,
+    arrayInfo.nombrePasajero,
+    arrayInfo.apellidoPasajero,
+    arrayInfo.idPasajero,
+    arrayInfo.emailPasajero,
+    arrayInfo.celPasajero,
+    arrayInfo.ciudadPasajero, */
