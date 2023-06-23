@@ -18,6 +18,10 @@ h1 {
   color: #2b3c73;
 }
 
+.justified-text {
+  text-align: justify;
+}
+
 .tooltip-blue .tooltip-inner {
   background-color: #2b3c73;
 }
@@ -89,6 +93,18 @@ h1 {
 
 .btn-maincolor {
   background-color: #2b3c73;
+  width: 30%;
+  margin: 0 10px;
+}
+
+.btn-whatsapp {
+  background-color: #25d365f8;
+  width: 30%;
+  margin: 0 10px;
+}
+
+.btn-secondcolor {
+  background-color: #a70237;
   width: 30%;
   margin: 0 10px;
 }

@@ -1,7 +1,4 @@
 // TODO(developer): Set to client ID and API key from the Developer Console
-/* const CLIENT_ID =
-  "927847270096-m4lrqakur4u675drcsqjm3a1b871qa32.apps.googleusercontent.com";
-const API_KEY = "AIzaSyA6Xe4u2ifVuiXsd1kPQKmX3JcXTDGG0LM"; */
 
 const CLIENT_ID =
   "714263892609-5ro523qd4j4filjdp64um2phbik8m9e4.apps.googleusercontent.com";
@@ -97,8 +94,7 @@ function handleSignoutClick() {
   if (token !== null) {
     google.accounts.oauth2.revoke(token.access_token);
     gapi.client.setToken("");
-    document.getElementById("content").innerText = "";
-    document.getElementById("authorize_button").innerText = "Authorize";
+    document.getElementById("authorize_button").innerText = "Iniciar Sesión";
     document.getElementById("signout_button").style.visibility = "hidden";
   }
 }
