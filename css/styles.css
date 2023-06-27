@@ -104,9 +104,18 @@ h1 {
 }
 
 .btn-maincolor {
+  /*   background-color: #2b3c73;
+  width: 30%;
+  margin: 0 10px; */
   background-color: #2b3c73;
   width: 30%;
   margin: 0 10px;
+}
+@media (max-width: 768px) {
+  .btn-maincolor {
+    width: 100%;
+    margin: 10px 0;
+  }
 }
 
 .btn-whatsapp {
