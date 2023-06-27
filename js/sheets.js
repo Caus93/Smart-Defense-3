@@ -6,12 +6,21 @@ localStorage.getItem("datosFormulario")
     localStorage.setItem("datosFormulario", JSON.stringify(arrayInfo)));
 
 async function agregarDatosSheet(datos) {
-  const aerolineaSeleccionada =
-    aerolinea.options[aerolinea.selectedIndex].textContent;
-  const causalNalSeleccionada =
-    causalNal.options[causalNal.selectedIndex].textContent;
-  const causalIntlSeleccionada =
-    causalIntl.options[causalIntl.selectedIndex].textContent;
+  const aerolineaSeleccionada = aerolinea.options[
+    aerolinea.selectedIndex
+  ].textContent
+    .trim()
+    .replace(/\n\s+/g, "");
+  const causalNalSeleccionada = causalNal.options[
+    causalNal.selectedIndex
+  ].textContent
+    .trim()
+    .replace(/\n\s+/g, " ");
+  const causalIntlSeleccionada = causalIntl.options[
+    causalIntl.selectedIndex
+  ].textContent
+    .trim()
+    .replace(/\n\s+/g, " ");
   const update = [
     datos.id,
     datos.aeropuertoSalida,
@@ -31,6 +40,8 @@ async function agregarDatosSheet(datos) {
     datos.celPasajero,
     datos.ciudad,
   ];
+
+  console.log(update);
 
   // Realizar la solicitud de actualización de datos en el archivo de Google Sheets
   const response = await gapi.client.sheets.spreadsheets.values.append({

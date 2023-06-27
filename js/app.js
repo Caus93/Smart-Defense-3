@@ -209,15 +209,6 @@ const aeropuertoSalida = document.getElementById("aeropuertoSalida");
 
 const aeropuertoDestino = document.getElementById("aeropuertoDestino");
 
-const aerolinea = document.getElementById("aerolinea");
-const aerolineaSeleccionada = aerolinea.options[aerolinea.selectedIndex].text;
-
-const causalNal = document.getElementById("causalNal");
-const causalNalSeleccionada = causalNal.options[aerolinea.selectedIndex].text;
-
-const causalIntl = document.getElementById("causalIntl");
-const causalIntlSeleccionada = causalIntl.options[aerolinea.selectedIndex].text;
-
 const numeroVuelo = document.getElementById("numeroVuelo");
 
 const fechaVueloInput = document.getElementById("fechaVuelo");
@@ -230,6 +221,18 @@ async function enviarDatos() {
   const idPasajeroNumero = parseFloat(idPasajero.value);
   const celPasajeroNumero = parseFloat(celPasajero.value);
   const fechaVueloSeleccionada = $('input[name="fechaVuelo"]')[0].value;
+
+  const aerolinea = document.getElementById("aerolinea");
+  const aerolineaSeleccionada =
+    aerolinea.options[aerolinea.selectedIndex].textContent.trim();
+
+  const causalNal = document.getElementById("causalNal");
+  const causalNalSeleccionada =
+    causalNal.options[causalNal.selectedIndex].textContent.trim();
+
+  const causalIntl = document.getElementById("causalIntl");
+  const causalIntlSeleccionada =
+    causalIntl.options[causalIntl.selectedIndex].textContent.trim();
 
   const datosFormulario = {
     nombre: nombrePasajero.value,
