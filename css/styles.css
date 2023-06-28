@@ -46,7 +46,24 @@ h1 {
   text-align: center;
   box-shadow: 0 2px 3px rgba(0 0 0 / 0.15);
   width: 30%;
-  margin: 0 10px;
+}
+
+.placeholder-person-2 {
+  padding: 0.25em 0.6em;
+  border-radius: 0.3rem;
+  border: 1px, solid, #d3d6e4;
+  text-align: center;
+  box-shadow: 0 2px 3px rgba(0 0 0 / 0.15);
+  width: 92%;
+}
+
+.form-style-inputs {
+  padding: 0.25em 0.6em;
+  border-radius: 0.3rem;
+  border: 1px, solid, #d3d6e4;
+  text-align: center;
+  box-shadow: 0 2px 3px rgba(0 0 0 / 0.15);
+  width: 30%;
 }
 
 .icono-placeholder-image::placeholder {
@@ -155,11 +172,23 @@ h1 {
   }
 }
 
+@media (min-width: 768px) {
+  .icono-placeholder-image2,
+  .icono-placeholder-image,
+  .custom-btn {
+    margin: 0 10px;
+  }
+}
+
 @media (max-width: 991px) {
   .icono-placeholder-image::placeholder,
   .icono-placeholder-image2::placeholder {
     background-position: 0.2rem center;
   }
+}
+
+.select-style {
+  width: 92%;
 }
 
 @media (max-width: 991px) {
@@ -169,12 +198,12 @@ h1 {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .form-select-sm option:first-child {
+  /*   .form-select-sm option:first-child {
     display: none;
   }
   .form-select-sm option:first-child::before {
     content: "Aerolínea";
-  }
+  } */
 }
 
 @media (max-width: 767px) {
