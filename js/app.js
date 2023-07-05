@@ -123,6 +123,7 @@ btnEnviar.addEventListener("click", (event) => {
     confirmButtonText: "Sí, seguro",
     cancelButtonText: "No, no quiero",
     confirmButtonColor: "green",
+    text: `Recuerde que al enviar los datos usted está aceptando nuestra política de tratamiento de datos personales`,
     cancelButtonColor: "red",
   }).then((result) => {
     if (result.isConfirmed) {
